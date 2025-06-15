@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rooms List</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #b0e0e6, #d8bfd8, #fadadd, #fff5e1);
+            color: #4A4A4A;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #5A5A5A;
+        }
+        
+        .links {
+            margin: 10px 0;
+        }
+        
+        .links a {
+            text-decoration: none;
+            color: #6a11cb;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        
+        .room-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+        
+        .room-card {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            width: 250px;
+            margin: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .occupied {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .btn {
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .book {
+            background: #A3C1AD;
+            color: white;
+        }
+        
+        .book:hover {
+            background: #88BDBC;
+        }
+        
+        .edit {
+            background: #ffc107;
+            color: black;
+        }
+        
+        .edit:hover {
+            background: #e0a800;
+        }
+        
+        .delete {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .delete:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏠 Available Rooms</h1>
+    <div class="links">
+        <a href="/">🏡 Back to Home</a> | <a href="/add-room/">➕ Add Room</a>
+    </div>
+
+    <div class="room-container">
+        {% for room in rooms %}
+        <div class="room-card">
+            <h3>Room {{ room.number }} - {{ room.room_type }}</h3>
+            <p>Price: ${{ room.price }}</p>
+            {% if room.status == "Available" %}
+            <p class="available">✅ Available</p>
+            <a href="/book-room/{{ room.id }}/" class="btn book">Book Now</a> {% else %}
+            <p class="occupied">❌ Occupied</p>
+            {% endif %}
+            <br>
+            <a href="/edit-room/{{ room.id }}/" class="btn edit">✏️ Edit</a>
+            <a href="/delete-room/{{ room.id }}/" class="btn delete">🗑 Delete</a>
+        </div>
+        {% empty %}
+        <p>No rooms available.</p>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rooms List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        
+        .room-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            background: white;
+            width: 250px;
+            border-radius: 5px;
+        }
+        
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .occupied {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .btn {
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .edit {
+            background: #ffc107;
+            color: black;
+        }
+        
+        .delete {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏠 Available Rooms</h1>
+    <a href="/">🏡 Back to Home</a> | <a href="/add-room/">➕ Add Room</a>
+    <div>
+        {% for room in rooms %}
+        <div class="room-card">
+            <h3>Room {{ room.number }} - {{ room.room_type }}</h3>
+            <p>Price: ${{ room.price }}</p>
+            {% if room.status == "Available" %}
+            <p class="available">✅ Available</p>
+            <a href="/book-room/{{ room.id }}/" class="btn">Book Now</a> {% else %}
+            <p class="occupied">❌ Occupied</p>
+            {% endif %}
+            <br>
+            <a href="/edit-room/{{ room.id }}/" class="btn edit">✏️ Edit</a>
+            <a href="/delete-room/{{ room.id }}/" class="btn delete">🗑 Delete</a>
+        </div>
+        {% empty %}
+        <p>No rooms available.</p>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

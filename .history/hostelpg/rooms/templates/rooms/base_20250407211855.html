@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Hostel PG App{% endblock %}</title>
+</head>
+
+<body>
+
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}!</p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a> |
+    <a href="{% url 'signup' %}">Signup</a> {% endif %}
+
+    <hr> {% block content %}
+    <!-- Child templates will insert content here -->
+    {% endblock %}
+
+</body>
+
+</html>

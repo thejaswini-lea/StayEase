@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Room {{ room.number }} Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 28px;
+        }
+        
+        .review {
+            text-align: left;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+        }
+        
+        .review strong {
+            font-size: 18px;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        
+        button {
+            background: #ff9800;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background: #e68900;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Room {{ room.number }} Details</h1>
+        <p>💰 Price: ₹{{ room.price }}</p>
+        <p>📌 Status: {{ room.status }}</p>
+
+        <h2>Reviews & Ratings</h2>
+
+        {% for review in reviews %}
+        <div class="review">
+            <strong>{{ review.name }}</strong> ⭐ {{ review.rating }}/5
+            <p>{{ review.comment }}</p>
+            <small>🕒 {{ review.created_at }}</small>
+        </div>
+        {% empty %}
+        <p>No reviews yet. Be the first to review!</p>
+        {% endfor %}
+
+        <h2>Leave a Review</h2>
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <br>
+        <a href="{% url 'room_list' %}" style="color: white;">🔙 Back to Room List</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{% extends 'rooms/base.html' %} {% block title %}Signup{% endblock %} {% block content %}
+<div class="container">
+    <h2>Signup</h2>
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+{% endblock %}

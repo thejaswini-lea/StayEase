@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Room</title>
+</head>
+
+<body>
+    <h1>🗑 Delete Room</h1>
+    <div class="confirm-box">
+        <p>Are you sure you want to delete Room {{ room.number }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="delete">Yes, Delete</button>
+            <a href="/rooms/" class="cancel">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>

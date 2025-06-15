@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Room</title>
+</head>
+
+<body>
+    <h1>✏️ Edit Room</h1>
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    <br>
+    <a href="/rooms/">🔙 Back to Room List</a>
+</body>
+
+</html>

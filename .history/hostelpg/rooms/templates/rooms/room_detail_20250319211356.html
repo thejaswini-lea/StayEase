@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Room {{ room.number }}</title>
+</head>
+
+<body>
+    <h1>Room {{ room.number }} - {{ room.room_type }}</h1>
+    <p>Price: ₹{{ room.price }}</p>
+
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+    <div>
+        <p><strong>{{ review.name }}</strong> - {{ review.rating }}⭐</p>
+        <p>{{ review.comment }}</p>
+        <hr>
+    </div>
+    {% empty %}
+    <p>No reviews yet. Be the first to review!</p>
+    {% endfor %}
+
+    <h3>Add a Review</h3>
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <br>
+    <a href="/rooms/">🔙 Back to Room List</a>
+</body>
+
+</html>
